@@ -24,18 +24,20 @@
 [merge]
 	tool = Kaleidoscope
 [mergetool]
-    prompt = false
+	prompt = false
     keepBackups = false
 [mergetool "mergepbx"]
     cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" \"$REMOTE\"
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 #driver for merging Xcode project files
+	trustExitCode = true
 [merge "mergepbx"]
     name = Xcode project files merger
     driver = mergepbx %O %A %B
 [difftool]
-    prompt = false
+	prompt = false
+	trustExitCode = true
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [help]
@@ -53,7 +55,9 @@
 	process = git-lfs filter-process
 [credential]
     helper = osxkeychain
-[gpg]
-	program = /usr/local/bin/gpg
+#[gpg]
+#	program = /opt/homebrew/bin/gpg
 [commit]
-	gpgsign = true
+#	gpgsign = true
+[diff]
+	tool = Kaleidoscope
