@@ -42,6 +42,8 @@
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [help]
     autocorrect = 1
+[interactive]
+    singleKey = true
 [push]
         # See `git help config` (search for push.default)
         # for more information on different options of the below setting.
