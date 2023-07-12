@@ -8,4 +8,4 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias reload!=". ~/.zshrc"
 alias trash="rmtrash"
 alias t="todo.sh"
-
+alias deeplink="xcrun simctl openurl booted"
