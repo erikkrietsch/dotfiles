@@ -85,3 +85,6 @@
 #	gpgsign = true
 [diff]
 	tool = Kaleidoscope
+[user]
+	name = Erik Krietsch
+	email = ekrietsch@expedia.com
