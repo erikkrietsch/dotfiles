@@ -22,4 +22,4 @@ alias gpp='git push origin +$(git rev-parse --abbrev-ref HEAD)'
 alias gdoff='git reset --soft HEAD~1'
 alias gap='git add . --patch'
 alias grc='git rebase --continue'
-
+alias oneline='git log --oneline'

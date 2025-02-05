@@ -43,25 +43,18 @@
     whitespace = nowarn
 [fetch]
     prune = true
-[merge]
-	tool = Kaleidoscope
 [mergetool]
-	prompt = false
     keepBackups = false
+	prompt = false
 [mergetool "mergepbx"]
     cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 #driver for merging Xcode project files
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
 [merge "mergepbx"]
     name = Xcode project files merger
     driver = mergepbx %O %A %B
-[difftool]
-	prompt = false
-	trustExitCode = true
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [help]
     autocorrect = 1
 [interactive]
@@ -83,8 +76,15 @@
 #	program = /opt/homebrew/bin/gpg
 [commit]
 #	gpgsign = true
-[diff]
-	tool = Kaleidoscope
 [user]
 	name = Erik Krietsch
-	email = ekrietsch@expedia.com
+	email = ekrietsch@expediagroup.com
+[diff]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+	trustExitCode = true
+[merge]
+	tool = Kaleidoscope

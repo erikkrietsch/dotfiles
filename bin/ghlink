@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <local_path_to_file_or_directory>"
+    exit 1
+fi
+
+local_path="$1"
+
+# Navigate to the root directory of the git repository
+git_root=$(git rev-parse --show-toplevel)
+cd "$git_root" || exit
+
+# Extract the GitHub remote URL from .git/config
+remote_url=$(git config --get remote.origin.url)
+
+# Convert SSH format to HTTPS format
+remote_url=$(echo "${remote_url}" | sed -e 's/git@/https:\/\//;s/:/\//')
+
+# Remove the .git suffix from the URL
+remote_url="${remote_url%.git}"
+
+# Get the current branch name
+current_branch=$(git branch --show-current)
+
+# Calculate the relative path from the git repository root
+# macOS compatible alternative to realpath --relative-to
+relative_path=$(cd "$(dirname "${local_path}")"; pwd -P)/$(basename "${local_path}")
+relative_path="${relative_path#$git_root/}"
+
+# Construct the GitHub URL
+github_url="${remote_url}/blob/${current_branch}/${relative_path}"
+
+echo "${github_url}"
